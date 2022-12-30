@@ -1,79 +1,55 @@
 $color-primary: red;
 $color-secondary: blue;
 $color-tertiary: green;
-@mixin red-text {
-  color: $color-primary;
-}
-@mixin blue-text {
-  color: $color-secondary;
-}
-@mixin font-size {
-  font-size: 1rem;
+
+@mixin text($color, $font-size) {
+  color: $color;
+  font-size: $font-size;
 }
 @mixin green-border-right {
   border-right: 3px solid $color-tertiary;
 }
-@mixin green-text {
-  color: $color-tertiary;
-}
-@mixin footer-font-size {
-  font-size: 24px;
-}
-@mixin blue-border-color {
-  border-color: $color-secondary;
+@mixin border($border) {
+  border: $border;
 }
 
 div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid $color-primary;
+  @include border(1px solid $color-primary);
   padding: 2rem;
   h1 {
-    @include green-text();
-    border-bottom: 1px solid;
-    @include blue-border-color();
+    @include text($color-tertiary, 2rem);
+    border-bottom: 2px solid $color-secondary;
   }
   section {
     &:nth-of-type(1) {
       display: flex;
-      border: 2px solid $color-tertiary;
+      @include border(2px solid $color-tertiary);
       padding: 0 2rem;
       article {
         text-align: center;
         padding: 1rem;
-        p {
-          @include font-size();
-        }
-        &:nth-of-type(1) {
-          @include blue-text();
+        &:nth-of-type(odd) {
+          @include text($color-secondary, 1rem);
           @include green-border-right();
-          @include font-size();
         }
         &:nth-of-type(2) {
-          @include red-text();
+          @include text($color-primary, 1rem);
           @include green-border-right();
-          @include font-size();
-        }
-        &:nth-of-type(3) {
-          @include blue-text();
-          @include green-border-right();
-          @include font-size();
         }
         &:nth-of-type(4) {
-          @include red-text();
-          @include font-size();
+          @include text($color-primary, 1rem);
         }
       }
     }
     &:nth-of-type(2) {
-      border: 2px solid;
-      @include blue-border-color();
+      @include border(2px solid $color-secondary);
       padding: 1.5rem 4.5rem;
       margin-top: 1rem;
       article {
-        @include green-text();
-        @include footer-font-size();
+        @include text($color-tertiary, 24px);
       }
     }
   }
